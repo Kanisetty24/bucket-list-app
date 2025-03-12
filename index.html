@@ -60,9 +60,10 @@
       goalText.textContent = goal;
       li.appendChild(goalText);
 
-      // Create and add "Remove" button
+      // Create and add "Remove" button (delete icon)
       const removeBtn = document.createElement("button");
-      removeBtn.textContent = "❌ Remove";
+      removeBtn.textContent = "❌";
+      removeBtn.classList.add("remove-btn");
       removeBtn.onclick = () => {
         li.remove(); // Remove goal from the list
         saveGoals(); // Update localStorage
@@ -112,9 +113,10 @@
         if (done) goalText.classList.add("done");
         li.appendChild(goalText);
 
-        // Create and add "Remove" button
+        // Create and add "Remove" button (delete icon)
         const removeBtn = document.createElement("button");
-        removeBtn.textContent = "❌ Remove";
+        removeBtn.textContent = "❌";
+        removeBtn.classList.add("remove-btn");
         removeBtn.onclick = () => {
           li.remove(); // Remove goal from the list
           saveGoals(); // Update localStorage
