@@ -32,6 +32,7 @@ This screen includes:
     Clone this repo:
 
 git clone https://github.com/Kanisetty24/bucket-list-app.git
+
 cd bucket-list-app
 
     Open in browser:
