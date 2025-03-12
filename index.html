@@ -5,13 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Dreamy Bucket List</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Add this style to show the completed goals */
-    .done {
-      text-decoration: line-through;
-      color: #999;
-    }
-  </style>
 </head>
 <body>
   <!-- Background Music -->
@@ -87,7 +80,7 @@
       li.appendChild(removeBtn); // Append the "Remove" button to the list item
 
       li.onclick = () => {
-        goalText.classList.toggle("done"); // Mark goal as done
+        goalText.classList.toggle("done"); // Toggle the "done" class (green text for completed)
         saveGoals(); // Update localStorage
       };
 
@@ -126,7 +119,7 @@
         // Create goal text element
         const goalText = document.createElement("span");
         goalText.textContent = text;
-        if (done) goalText.classList.add("done");
+        if (done) goalText.classList.add("done"); // Apply green color if goal is done
         li.appendChild(goalText);
 
         // Create and add "Remove" button (delete icon)
@@ -140,7 +133,7 @@
         li.appendChild(removeBtn); // Append the "Remove" button to the list item
 
         li.onclick = () => {
-          goalText.classList.toggle("done");
+          goalText.classList.toggle("done"); // Toggle green color when clicked
           saveGoals();
         };
 
