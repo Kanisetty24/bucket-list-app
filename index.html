@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Dreamy Bucket List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🌸 My Dreamy Bucket List</h1>
+    
+    <div id="welcome" class="welcome-screen">
+      <p>Hey dreamer! Ready to add your first wish? 🌟</p>
+      <button onclick="startApp()">Add Dream</button>
+    </div>
+
+    <div id="app" class="app hidden">
+      <input type="text" id="goalInput" placeholder="Add your goal..." />
+      <button onclick="addGoal()">➕ Add</button>
+      
+      <ul id="goalList"></ul>
+    </div>
+  </div>
+
+  <script>
+    const goalInput = document.getElementById("goalInput");
+    const goalList = document.getElementById("goalList");
+    const welcome = document.getElementById("welcome");
+    const app = document.getElementById("app");
+
+    function startApp() {
+      welcome.style.display = "none";
+      app.classList.remove("hidden");
+      loadGoals();
+    }
+
+    function addGoal() {
+      const goal = goalInput.value.trim();
+      if (!goal) return;
+
+      const li = document.createElement("li");
+      li.textContent = goal;
+      li.onclick = () => li.classList.toggle("done");
+
+      goalList.appendChild(li);
+      saveGoals();
+      goalInput.value = "";
+    }
+
+    function saveGoals() {
+      const items = [];
+      goalList.querySelectorAll("li").forEach(li => {
+        items.push({ text: li.textContent, done: li.classList.contains("done") });
+      });
+      localStorage.setItem("goals", JSON.stringify(items));
+    }
+
+    function loadGoals() {
+      const saved = JSON.parse(localStorage.getItem("goals") || "[]");
+      saved.forEach(({ text, done }) => {
+        const li = document.createElement("li");
+        li.textContent = text;
+        if (done) li.classList.add("done");
+        li.onclick = () => {
+          li.classList.toggle("done");
+          saveGoals();
+        };
+        goalList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
+
