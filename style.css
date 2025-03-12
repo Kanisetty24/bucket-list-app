@@ -9,6 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 /* Container */
@@ -43,11 +44,12 @@ button {
   border-radius: 10px;
   color: white;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 button:hover {
   background-color: #ff7b8a;
+  transform: scale(1.1);
 }
 
 /* Focus styles for accessibility */
@@ -123,4 +125,24 @@ li:hover {
   input[type="text"] {
     width: 100%;
   }
+}
+
+/* Audio Controls */
+#bgMusic {
+  display: none; /* Hidden by default */
+}
+
+.audio-control {
+  background-color: #ff7b8a;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  color: white;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.audio-control:hover {
+  background-color: #ff4c59;
 }
