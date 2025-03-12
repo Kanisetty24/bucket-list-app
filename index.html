@@ -42,17 +42,21 @@
       { text: "Try cooking something I can’t pronounce", done: false }
     ];
 
-    function startApp() {
-      welcome.style.display = "none";
-      app.classList.remove("hidden");
+   function startApp() {
+  welcome.style.display = "none";
+  app.classList.remove("hidden");
+  loadGoals();
 
-      // If no saved goals, show default preview
-      if (!localStorage.getItem("goals")) {
-        localStorage.setItem("goals", JSON.stringify(defaultGoals));
-      }
+  // Start background music
+  const bgMusic = document.getElementById("bgMusic");
+  bgMusic.volume = 0.5;
+  bgMusic.play().then(() => {
+    console.log("🎵 Music playing...");
+  }).catch((err) => {
+    console.log("❌ Error playing music:", err);
+  });
+}
 
-      loadGoals();
-    }
 
     function addGoal() {
       const goal = goalInput.value.trim();
