@@ -8,7 +8,7 @@
 </head>
 <body>
   <!-- Background Music -->
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop preload="auto">
     <source src="assets/Amaran-Sai-Pallavi-Bgm-1.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
@@ -19,7 +19,7 @@
     <!-- Welcome Screen -->
     <div id="welcome" class="welcome-screen">
       <p>Hey dreamer! Ready to add your first wish? 🌟</p>
-      <button onclick="startApp()">Add Dream</button>
+      <button id="startBtn">Add Dream</button>
     </div>
 
     <!-- App -->
@@ -35,25 +35,23 @@
     const goalList = document.getElementById("goalList");
     const welcome = document.getElementById("welcome");
     const app = document.getElementById("app");
-
-    const defaultGoals = [
-      { text: "Visit Bhadrachalam Temple by boat", done: true },
-      { text: "Travel to America", done: false },
-      { text: "Try cooking something I can’t pronounce", done: false }
-    ];
+    const startBtn = document.getElementById("startBtn");
+    const bgMusic = document.getElementById("bgMusic");
 
     function startApp() {
+      // Show the app
       welcome.style.display = "none";
       app.classList.remove("hidden");
+
+      // Load goals
       loadGoals();
 
-      // Start background music
-      const bgMusic = document.getElementById("bgMusic");
+      // Start music
       bgMusic.volume = 0.5;
       bgMusic.play().then(() => {
         console.log("🎵 Music playing...");
-      }).catch((err) => {
-        console.log("❌ Error playing music:", err);
+      }).catch(err => {
+        console.warn("⚠️ Music play failed (autoplay blocked?):", err);
       });
     }
 
@@ -80,7 +78,7 @@
 
     function loadGoals() {
       const saved = JSON.parse(localStorage.getItem("goals") || "[]");
-      goalList.innerHTML = ""; // Clear existing list
+      goalList.innerHTML = "";
       saved.forEach(({ text, done }) => {
         const li = document.createElement("li");
         li.textContent = text;
@@ -93,9 +91,9 @@
       });
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const bgMusic = document.querySelector("audio");
-      if (bgMusic) bgMusic.volume = 0.2;
+    // Wait for DOM, then hook up button
+    document.addEventListener("DOMContentLoaded", () => {
+      startBtn.addEventListener("click", startApp);
     });
   </script>
 </body>
