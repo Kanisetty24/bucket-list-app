@@ -37,9 +37,9 @@
     const app = document.getElementById("app");
 
     function startApp() {
-      welcome.style.display = "none";
-      app.classList.remove("hidden");
-      loadGoals();
+      welcome.style.display = "none"; // Hide the welcome message
+      app.classList.remove("hidden"); // Show the main app
+      loadGoals(); // Load goals from localStorage or use sample ones
 
       // Play background music
       const bgMusic = document.getElementById("bgMusic");
@@ -72,6 +72,18 @@
 
     function loadGoals() {
       const saved = JSON.parse(localStorage.getItem("goals") || "[]");
+      
+      // Adding sample items if no goals exist in localStorage
+      if (saved.length === 0) {
+        const sampleGoals = [
+          { text: "Visit Bhadrachalam Temple by boat", done: false },
+          { text: "Travel to America", done: false },
+          { text: "Try cooking something I can’t pronounce", done: false }
+        ];
+        saved.push(...sampleGoals);
+        localStorage.setItem("goals", JSON.stringify(saved));
+      }
+
       goalList.innerHTML = "";
       saved.forEach(({ text, done }) => {
         const li = document.createElement("li");
