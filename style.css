@@ -1,84 +1,91 @@
+/* Reset & Base */
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to top, #ffe5ec, #d8f3dc);
+  background: linear-gradient(to right, #ffdde1, #ee9ca7);
   color: #333;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   min-height: 100vh;
-  padding: 40px 20px;
 }
 
+/* Container */
 .container {
-  background: white;
+  background: #fff;
+  padding: 2rem;
   border-radius: 20px;
-  padding: 30px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-}
-
-h1 {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
   text-align: center;
-  color: #ff70a6;
-  margin-bottom: 20px;
 }
 
-input[type="text"] {
-  width: 70%;
-  padding: 10px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  margin-right: 10px;
+/* Heading */
+h1 {
+  font-size: 1.8rem;
+  color: #d6336c;
+  margin-bottom: 1rem;
+}
+
+/* Welcome screen */
+.welcome-screen p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 button {
-  background: #70d6ff;
-  color: white;
-  padding: 10px 15px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #ffb6b9;
   border: none;
   border-radius: 10px;
+  color: white;
   cursor: pointer;
-  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background: #4dbfe3;
+  background-color: #ff7b8a;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-li {
-  background: #fef9ef;
-  padding: 10px 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-
-li.done {
-  text-decoration: line-through;
-  color: #aaa;
-  background: #d3f8e2;
-}
-
-.welcome-screen {
-  text-align: center;
-}
-
-.welcome-screen p {
-  font-size: 1.2em;
-  margin-bottom: 15px;
-}
-
+/* App Section */
 .hidden {
   display: none;
 }
 
+input[type="text"] {
+  padding: 0.5rem;
+  width: 70%;
+  border: 2px solid #ffb6b9;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
 
+/* Goals List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #ffe3e3;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #ffc1c1;
+}
+
+/* Done Goals */
+.done {
+  text-decoration: line-through;
+  color: #888;
+  background-color: #d3d3d3;
+}
