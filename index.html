@@ -19,7 +19,7 @@
     <!-- Welcome Screen -->
     <div id="welcome" class="welcome-screen">
       <p>Hey dreamer! Ready to add your first wish? 🌟</p>
-      <button onclick="startApp()">Add Dream</button>
+      <button id="startButton" onclick="startApp()">Add Dream</button>
     </div>
 
     <!-- App -->
@@ -35,19 +35,27 @@
     const goalList = document.getElementById("goalList");
     const welcome = document.getElementById("welcome");
     const app = document.getElementById("app");
+    const startButton = document.getElementById("startButton");
+    const bgMusic = document.getElementById("bgMusic");
 
-    // Play background music and show the app after clicking "Add Dream"
     function startApp() {
-      welcome.style.display = "none"; // Hide the welcome message
-      app.classList.remove("hidden"); // Show the main app
-      loadGoals(); // Load goals from localStorage or use sample ones
+      // Hide the welcome screen
+      welcome.style.display = "none"; 
+
+      // Show the main app section
+      app.classList.remove("hidden"); 
+
+      // Load goals from localStorage or use sample ones
+      loadGoals(); 
 
       // Play background music
-      const bgMusic = document.getElementById("bgMusic");
-      bgMusic.volume = 0.5; // Set the music volume
+      bgMusic.volume = 0.5; 
       bgMusic.play().catch(err => {
         console.log("Autoplay prevented. User must interact first.", err);
       });
+
+      // Optionally remove the "Add Dream" button after the music starts
+      startButton.style.display = "none";
     }
 
     function addGoal() {
