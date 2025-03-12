@@ -7,18 +7,25 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2021/08/09/audio_cb4a759b9a.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
   <div class="container">
     <h1>🌸 My Dreamy Bucket List</h1>
     
+    <!-- Welcome Screen -->
     <div id="welcome" class="welcome-screen">
       <p>Hey dreamer! Ready to add your first wish? 🌟</p>
       <button onclick="startApp()">Add Dream</button>
     </div>
 
+    <!-- App -->
     <div id="app" class="app hidden">
       <input type="text" id="goalInput" placeholder="Add your goal..." />
       <button onclick="addGoal()">➕ Add</button>
-      
       <ul id="goalList"></ul>
     </div>
   </div>
@@ -29,9 +36,21 @@
     const welcome = document.getElementById("welcome");
     const app = document.getElementById("app");
 
+    const defaultGoals = [
+      { text: "Visit Bhadrachalam Temple by boat", done: true },
+      { text: "Travel to America", done: false },
+      { text: "Try cooking something I can’t pronounce", done: false }
+    ];
+
     function startApp() {
       welcome.style.display = "none";
       app.classList.remove("hidden");
+
+      // If no saved goals, show default preview
+      if (!localStorage.getItem("goals")) {
+        localStorage.setItem("goals", JSON.stringify(defaultGoals));
+      }
+
       loadGoals();
     }
 
@@ -58,6 +77,7 @@
 
     function loadGoals() {
       const saved = JSON.parse(localStorage.getItem("goals") || "[]");
+      goalList.innerHTML = ""; // Clear existing list
       saved.forEach(({ text, done }) => {
         const li = document.createElement("li");
         li.textContent = text;
@@ -69,7 +89,12 @@
         goalList.appendChild(li);
       });
     }
+
+    // Optional: Lower volume
+    document.addEventListener("DOMContentLoaded", function () {
+      const bgMusic = document.querySelector("audio");
+      if (bgMusic) bgMusic.volume = 0.2;
+    });
   </script>
 </body>
 </html>
-
