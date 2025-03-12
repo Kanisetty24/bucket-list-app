@@ -54,8 +54,25 @@
       if (!goal) return;
 
       const li = document.createElement("li");
-      li.textContent = goal;
-      li.onclick = () => li.classList.toggle("done");
+
+      // Create goal text element
+      const goalText = document.createElement("span");
+      goalText.textContent = goal;
+      li.appendChild(goalText);
+
+      // Create and add "Remove" button
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "❌ Remove";
+      removeBtn.onclick = () => {
+        li.remove(); // Remove goal from the list
+        saveGoals(); // Update localStorage
+      };
+      li.appendChild(removeBtn); // Append the "Remove" button to the list item
+
+      li.onclick = () => {
+        goalText.classList.toggle("done"); // Mark goal as done
+        saveGoals(); // Update localStorage
+      };
 
       goalList.appendChild(li);
       saveGoals();
@@ -65,7 +82,8 @@
     function saveGoals() {
       const items = [];
       goalList.querySelectorAll("li").forEach(li => {
-        items.push({ text: li.textContent, done: li.classList.contains("done") });
+        const goalText = li.querySelector("span");
+        items.push({ text: goalText.textContent, done: goalText.classList.contains("done") });
       });
       localStorage.setItem("goals", JSON.stringify(items));
     }
@@ -87,12 +105,27 @@
       goalList.innerHTML = "";
       saved.forEach(({ text, done }) => {
         const li = document.createElement("li");
-        li.textContent = text;
-        if (done) li.classList.add("done");
+
+        // Create goal text element
+        const goalText = document.createElement("span");
+        goalText.textContent = text;
+        if (done) goalText.classList.add("done");
+        li.appendChild(goalText);
+
+        // Create and add "Remove" button
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "❌ Remove";
+        removeBtn.onclick = () => {
+          li.remove(); // Remove goal from the list
+          saveGoals(); // Update localStorage
+        };
+        li.appendChild(removeBtn); // Append the "Remove" button to the list item
+
         li.onclick = () => {
-          li.classList.toggle("done");
+          goalText.classList.toggle("done");
           saveGoals();
         };
+
         goalList.appendChild(li);
       });
     }
