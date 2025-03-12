@@ -2,98 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Dreamy Bucket List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bucket List App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="container">
+    <h1>🌟 My Bucket List 🌟</h1>
+    <ul id="bucket-list">
+      <!-- dreams go here -->
+    </ul>
+    <button id="start-btn">Add Dream</button>
+  </div>
+
   <!-- Background Music -->
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bg-music" preload="auto" loop>
     <source src="assets/music.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
 
-  <div class="container">
-    <h1>🌸 My Dreamy Bucket List</h1>
-    
-    <!-- Welcome Screen -->
-    <div id="welcome" class="welcome-screen">
-      <p>Hey dreamer! Ready to add your first wish? 🌟</p>
-      <button id="startBtn">Add Dream</button>
-    </div>
-
-    <!-- App -->
-    <div id="app" class="app hidden">
-      <input type="text" id="goalInput" placeholder="Add your goal..." />
-      <button onclick="addGoal()">➕ Add</button>
-      <ul id="goalList"></ul>
-    </div>
-  </div>
-
   <script>
-    const goalInput = document.getElementById("goalInput");
-    const goalList = document.getElementById("goalList");
-    const welcome = document.getElementById("welcome");
-    const app = document.getElementById("app");
-    const startBtn = document.getElementById("startBtn");
-    const bgMusic = document.getElementById("bgMusic");
+    const startBtn = document.getElementById("start-btn");
+    const bgMusic = document.getElementById("bg-music");
+    const bucketList = document.getElementById("bucket-list");
 
+    // Optional: Start app logic (add a dream)
     function startApp() {
-      // Show the app
-      welcome.style.display = "none";
-      app.classList.remove("hidden");
+      const dream = prompt("What's one dream you'd love to achieve?");
+      if (dream) {
+        const li = document.createElement("li");
+        li.textContent = dream;
+        bucketList.appendChild(li);
+      }
+    }
 
-      // Load goals
-      loadGoals();
+    // Start button click handler
+    startBtn.addEventListener("click", () => {
+      startApp();
 
-      // Start music
+      // Play background music on user interaction
       bgMusic.volume = 0.5;
       bgMusic.play().then(() => {
-        console.log("🎵 Music playing...");
-      }).catch(err => {
-        console.warn("⚠️ Music play failed (autoplay blocked?):", err);
+        console.log("🎵 Background music playing...");
+      }).catch((error) => {
+        console.warn("⚠️ Unable to play music:", error);
       });
-    }
-
-    function addGoal() {
-      const goal = goalInput.value.trim();
-      if (!goal) return;
-
-      const li = document.createElement("li");
-      li.textContent = goal;
-      li.onclick = () => li.classList.toggle("done");
-
-      goalList.appendChild(li);
-      saveGoals();
-      goalInput.value = "";
-    }
-
-    function saveGoals() {
-      const items = [];
-      goalList.querySelectorAll("li").forEach(li => {
-        items.push({ text: li.textContent, done: li.classList.contains("done") });
-      });
-      localStorage.setItem("goals", JSON.stringify(items));
-    }
-
-    function loadGoals() {
-      const saved = JSON.parse(localStorage.getItem("goals") || "[]");
-      goalList.innerHTML = "";
-      saved.forEach(({ text, done }) => {
-        const li = document.createElement("li");
-        li.textContent = text;
-        if (done) li.classList.add("done");
-        li.onclick = () => {
-          li.classList.toggle("done");
-          saveGoals();
-        };
-        goalList.appendChild(li);
-      });
-    }
-
-    // Wait for DOM, then hook up button
-    document.addEventListener("DOMContentLoaded", () => {
-      startBtn.addEventListener("click", startApp);
     });
   </script>
 </body>
