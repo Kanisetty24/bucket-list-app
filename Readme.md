@@ -1,4 +1,4 @@
-[200~🌸 My Dreamy Bucket List App
+🌸 My Dreamy Bucket List App
 
 A fun and colorful web app to write down your dreams and goals — big or small!
 ✨ Features
