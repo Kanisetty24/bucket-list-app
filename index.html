@@ -28,11 +28,6 @@
       <button onclick="addGoal()">➕ Add</button>
       <ul id="goalList"></ul>
     </div>
-
-    <!-- Music Controls -->
-    <div class="music-controls">
-      <button onclick="toggleMusic()">🔊 Toggle Music</button>
-    </div>
   </div>
 
   <script>
@@ -40,15 +35,16 @@
     const goalList = document.getElementById("goalList");
     const welcome = document.getElementById("welcome");
     const app = document.getElementById("app");
-    const bgMusic = document.getElementById("bgMusic");
 
+    // Play background music and show the app after clicking "Add Dream"
     function startApp() {
       welcome.style.display = "none"; // Hide the welcome message
       app.classList.remove("hidden"); // Show the main app
       loadGoals(); // Load goals from localStorage or use sample ones
 
       // Play background music
-      bgMusic.volume = 0.5;
+      const bgMusic = document.getElementById("bgMusic");
+      bgMusic.volume = 0.5; // Set the music volume
       bgMusic.play().catch(err => {
         console.log("Autoplay prevented. User must interact first.", err);
       });
@@ -135,14 +131,6 @@
 
         goalList.appendChild(li);
       });
-    }
-
-    function toggleMusic() {
-      if (bgMusic.paused) {
-        bgMusic.play();
-      } else {
-        bgMusic.pause();
-      }
     }
   </script>
 </body>
